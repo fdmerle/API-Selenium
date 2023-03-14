@@ -1,0 +1,22 @@
+-------------------------------------------------------------------------------
+Test set: test_runner.TestRunner
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.296 sec <<< FAILURE!
+modify existing board(CRUD)  Time elapsed: 1.963 sec  <<< ERROR!
+org.openqa.selenium.remote.http.ConnectionFailedException: Unable to establish websocket connection to http://localhost:57651/devtools/browser/ea9c4489-4646-41dd-b511-5cb456e9a958
+Build info: version: '4.8.1', revision: '8ebccac989'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.5'
+Driver info: driver.version: Driver
+	at org.openqa.selenium.remote.http.netty.NettyWebSocket.<init>(NettyWebSocket.java:102)
+	at org.openqa.selenium.remote.http.netty.NettyWebSocket.lambda$create$3(NettyWebSocket.java:128)
+	at org.openqa.selenium.remote.http.netty.NettyClient.openSocket(NettyClient.java:107)
+	at org.openqa.selenium.devtools.Connection.<init>(Connection.java:78)
+	at org.openqa.selenium.chromium.ChromiumDriver.lambda$new$2(ChromiumDriver.java:116)
+	at java.base/java.util.Optional.map(Optional.java:260)
+	at org.openqa.selenium.chromium.ChromiumDriver.<init>(ChromiumDriver.java:114)
+	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:82)
+	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:50)
+	at wrappers.Driver.setWebDriver(Driver.java:27)
+	at step_definitions.MyStepdefs.iAsAUserOpenNavigateToUrlUsingBrowser(MyStepdefs.java:95)
+	at ✽.I as a user open navigate to url "trello.com" using browser "Chrome"(file:///C:/dev/API_Remembers/src/test/java/features/TestLib.feature:18)
+
