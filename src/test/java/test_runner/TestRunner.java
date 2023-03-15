@@ -7,7 +7,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = "pretty",
         features = "src/test/java/features",
-        glue = {"step_definitions"}
+        glue = {"step_definitions"},
+        tags = ("@Automated and not @NotAutomated")
 )
 public class TestRunner {
 
