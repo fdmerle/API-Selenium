@@ -1,7 +1,7 @@
 @Automated
 Feature: Automated CRUD
 
-  Scenario Outline: Create/Delete objects
+  Scenario Outline: Create/Delete objects UI
     Given I as a user create board with name "<BoardName>"
     And I as a user create list with name "<ListName>" in board with name "<BoardName>"
     And I as a user create card with name "<CardName>" in list with name "<ListName>" from the board "<BoardName>"
@@ -11,12 +11,12 @@ Feature: Automated CRUD
       | BoardName | ListName | CardName |
       | MyBoard   | MyList   | MyCard   |
 
-  Scenario: set maximum boards
+  Scenario: set maximum boards API
     Given I as a user create 11 boards with name "BoardName"
     Then I as a user should got respond: "Board must be in a team"
 
 
-  Scenario: modify existing board
+  Scenario: modify existing board API
     Given I as a user open navigate to url "http://trello.com" using browser "Chrome"
     And I as a user login to trello with credentials username "mdmerle@gmail.com" and password: "p@ssworD"
     When I as a user create board with name "BoardName"
