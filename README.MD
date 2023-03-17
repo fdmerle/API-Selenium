@@ -1,13 +1,13 @@
 Tasks
 =================
 
-Main goal - validation of CRUD process of board and all objects that could be part of boards on http://trello.com
-Manual Tests implemented:
-CRUD for Boards - src/test/java/features/Board.feature in gherkin format
-CRUD for Cards - src/test/java/features/Card.feature in checklist form
-CRUD for Lists - src/test/java/features/List.feature in checklist form
-Automation example (API and UI implementation) - src/test/java/features/AutomatedCRUD.feature
-Each automation tests includes After part that clean up any objects that was created during test run
+- Main goal - validation of CRUD process of board and all objects that could be part of boards on http://trello.com
+- Manual Tests implemented:
+  - CRUD for Boards - src/test/java/features/Board.feature in gherkin format
+  - CRUD for Cards - src/test/java/features/Card.feature in checklist form
+  - CRUD for Lists - src/test/java/features/List.feature in checklist form
+- Automation example (API and UI implementation) - src/test/java/features/AutomatedCRUD.feature
+- Each automation tests includes After part that clean up any objects that was created during test run
 
 Location and marking
 =================
