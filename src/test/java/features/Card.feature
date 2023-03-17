@@ -30,10 +30,4 @@
 #  Scenario: Get a warning after 4500 cards created
 #
 #  Scenario: Get a error message after 5000 cards created
-#
-#
-#
-#
-#
-#
-#
+

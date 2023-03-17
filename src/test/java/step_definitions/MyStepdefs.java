@@ -122,5 +122,81 @@ public class MyStepdefs {
     public void iAsAUserClickOnBoardLink() {
         trello.clickOnBoardLink(driver);
     }
+
+    @And("Create new board")
+    public void createNewBoard() {
+    }
+
+    @When("add the name to the board {string}")
+    public void addTheNameToTheBoard(String arg0) {
+    }
+
+    @Then("condition that the name {string} should be shown is {string}")
+    public void conditionThatTheNameShouldBeShownIs(String arg0, String arg1) {
+    }
+
+    @When("Create new board from the template with name {string}")
+    public void createNewBoardFromTheTemplateWithName(String arg0) {
+    }
+
+    @And("I close the board with name {string}")
+    public void iCloseTheBoardWithName(String arg0) {
+    }
+
+    @Then("Board with name {string} should be closed")
+    public void boardWithNameShouldBeClosed(String arg0) {
+    }
+
+    @And("I delete the board with name {string}")
+    public void iDeleteTheBoardWithName(String arg0) {
+    }
+
+    @Then("Board with name {string} should be deleted")
+    public void boardWithNameShouldBeDeleted(String arg0) {
+    }
+
+    @And("I open the board with name {string}")
+    public void iOpenTheBoardWithName(String arg0) {
+    }
+
+    @Then("condition that the board with name {string} should be shown is {string}")
+    public void conditionThatTheBoardWithNameShouldBeShownIs(String arg0, String arg1) {
+    }
+
+    @And("I move board with name {string} to workspace with name {string}")
+    public void iMoveBoardWithNameToWorkspaceWithName(String arg0, String arg1) {
+    }
+
+    @And("I switched to workspace with name {string}")
+    public void iSwitchedToWorkspaceWithName(String arg0) {
+    }
+
+    @Given("when I as a user login to http:\\/\\/Trello.com")
+    public void whenIAsAUserLoginToHttpTrelloCom() {
+    }
+
+    @And("I navigate to board settings")
+    public void iNavigateToBoardSettings() {
+    }
+
+    @And("I set card cover to {string}")
+    public void iSetCardCoverTo(String arg0) {
+    }
+
+    @Then("card cover should be visible")
+    public void cardCoverShouldBeVisible() {
+    }
+
+    @And("I change commenting permissions to {string}")
+    public void iChangeCommentingPermissionsTo(String arg0) {
+    }
+
+    @And("I login to system with user that have permission {string}")
+    public void iLoginToSystemWithUserThatHavePermission(String arg0) {
+    }
+
+    @And("I am have rights to add comments: {string}")
+    public void iAmHaveRightsToAddComments(String arg0) {
+    }
 }
 

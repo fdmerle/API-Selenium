@@ -1,3 +1,4 @@
+#@NotAutomated
 #Feature: CRUD List
 #
 #  Scenario: Rename the List
@@ -23,5 +24,4 @@
 #  Scenario: Move all card from the list to "Status"
 #
 #  Scenario: Archive all card in the list
-#
-#
+
