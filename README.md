@@ -1,4 +1,4 @@
-
+Tasks
 =================
 
 - Main goal - validation of CRUD process of board and all objects that could be part of boards on http://trello.com
@@ -12,10 +12,10 @@
 Prerequisites
 -------------
 
-In order to run browser tests, Selenium will need to be able to drive a browser installed to your system.
-- Firefox v.111.0 and/or 
-- Chrome v.111, 
-- bin directory of the Maven should be added to the PATH environment variable.
+- In order to run browser tests, Selenium will need to be able to drive a browser installed to your system.
+- Firefox v.111.0 
+- Chrome v.111 
+- bin directory of the Maven should be added to the PATH environment variable
 
 Clone the repo:
 -------------
@@ -24,6 +24,7 @@ git clone -b master https://github.com/knabnl-incubator/dmytro-moskalenko-knab.g
 
 Run test
 -------------
+To run tests with Maven, 
 mvn clean test
 
 via IDE: src/test/java/step_definitions/MyStepdefs.java as a JUnit
