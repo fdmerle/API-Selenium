@@ -43,7 +43,7 @@ Firefox v.111.0 and/or Chrome v.111 have to be installed
 
 Clone the repo:
 -------------
-git clone https://github.com/fdmerle/API-Selenium.git
+git clone -b master https://github.com/knabnl-incubator/dmytro-moskalenko-knab.git
 
 
 Run test
