@@ -31,6 +31,7 @@ public class MyStepdefs {
     private final Driver driver = new Driver();
     private Trello trello;
     Response responseBoard;
+
     @Before
     public void init() {
         apiRead = new ApiRead();
@@ -44,45 +45,55 @@ public class MyStepdefs {
     @And("I as a user create board with name {string}")
     public void iAsAUserCreateBoardWithName(String boardName) {
         Assert.assertTrue(apiCreate.createBoard(boardName));
-        history.put(ObjectType.BOARD,boardName);
+        history.put(ObjectType.BOARD, boardName);
     }
+
     @When("I remove the board with name {string}")
     public void iRemoveTheBoardWithName(String boardName) {
         Assert.assertTrue(apiDelete.removeBoardWithId(boardName));
         history.remove(ObjectType.BOARD);
     }
+
     @And("I as a user create list with name {string} in board with name {string}")
     public void iAsAUserCreateListWithNameInBoardWithName(String listName, String boardName) {
-        Assert.assertTrue(apiCreate.createList(listName,boardName));
-        history.put(ObjectType.LIST,listName);
+        Assert.assertTrue(apiCreate.createList(listName, boardName));
+        history.put(ObjectType.LIST, listName);
     }
+
     @And("I as a user create card with name {string} in list with name {string} from the board {string}")
     public void iAsAUserCreateCardWithNameInListWithNameFromTheBoard(String cardName, String listName, String boardName) {
-        Assert.assertTrue(apiCreate.createCard(cardName,listName,boardName));
-        history.put(ObjectType.CARD,apiRead.getCardIdInListFromBoard(cardName,listName,boardName));
+        Assert.assertTrue(apiCreate.createCard(cardName, listName, boardName));
+        history.put(ObjectType.CARD, apiRead.getCardIdInListFromBoard(cardName, listName, boardName));
     }
+
     @And("I remove the card with name {string} from the list {string} of board {string}")
     public void iRemoveTheCardWithNameFromTheListOfBoard(String cardName, String listName, String boardName) {
-        Assert.assertTrue(apiDelete.removeCardWithId(cardName,listName,boardName));
+        Assert.assertTrue(apiDelete.removeCardWithId(cardName, listName, boardName));
         history.remove(ObjectType.CARD);
     }
 
     @Given("I as a user create {int} boards with name {string}")
     public void iAsAUserCreateBoardsWithName(int boardsAmount, String boardName) {
-        for(int i=0;i<boardsAmount;i++){
+        for (int i = 0; i < boardsAmount; i++) {
             responseBoard = apiCreate.createBoardWithResponse(boardName);
         }
-        history.put(ObjectType.BOARD,boardName);
+        history.put(ObjectType.BOARD, boardName);
     }
 
     @Then("I as a user should got respond: {string}")
     public void iAsAUserShouldGotRespond(String assertString) {
         Assert.assertTrue(responseBoard.jsonPath().get().toString().contains(assertString));
     }
+
     @After
     public void cleanUp() {
-        if (history.containsKey(ObjectType.BOARD)){
-        apiDelete.removeAllBoards(history.get(ObjectType.BOARD));}
+        if (history.containsKey(ObjectType.BOARD)) {
+            apiDelete.removeAllBoards(history.get(ObjectType.BOARD));
+        }
+        if (trello != null) {
+            trello.cleanDriver(driver);
+
+        }
     }
 
     @Given("I as a user open navigate to url {string} using browser {string}")
@@ -94,27 +105,26 @@ public class MyStepdefs {
     @Given("I as a user login to trello with credentials username {string} and password: {string}")
     public void iAsAUserLoginToTrelloWithCredentialsUsernameAndPassword(String userName, String passWord) {
         trello = new Trello(driver);
-        trello.loginToPage(driver,userName,passWord);
+        trello.loginToPage(driver, userName, passWord);
     }
 
     @And("I as a user open the board with name {string}")
     public void iAsAUserOpenTheBoardWithName(String boardName) {
-        trello.openBoard(driver,boardName);
-        history.put(ObjectType.BOARD,boardName);
-
+        trello.openBoard(driver, boardName);
+        history.put(ObjectType.BOARD, boardName);
 
 
     }
 
     @And("I as a user modify the board name from {string} to {string}")
     public void iAsAUserModifyTheBoardNameFromTo(String oldName, String newName) {
-        trello.modifyBoardName(driver,oldName,newName);
+        trello.modifyBoardName(driver, oldName, newName);
     }
 
     @Then("board name should be {string}")
     public void boardNameShouldBe(String boardName) {
-        Assert.assertTrue(trello.boardsIsExist(driver,boardName));
-        history.put(ObjectType.BOARD,boardName);
+        Assert.assertTrue(trello.boardsIsExist(driver, boardName));
+        history.put(ObjectType.BOARD, boardName);
 
     }
 

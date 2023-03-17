@@ -21,4 +21,8 @@ private int waitingTimeSec=5;
         driver.getWebDriver().findElement(webObject.getBy()).sendKeys(textToEnter);
     }
 
+    public void cleanDriver(Driver driver){
+        driver.getWebDriver().quit();
+    }
+
 }
