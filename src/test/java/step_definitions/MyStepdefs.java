@@ -39,7 +39,6 @@ public class MyStepdefs {
         apiDelete = new ApiDelete();
         apiUpdate = new ApiUpdate();
         history = new HashMap<>();
-        Response responseBoard;
     }
 
     @And("I as a user create board with name {string}")
@@ -104,7 +103,7 @@ public class MyStepdefs {
 
     @Given("I as a user login to trello with credentials username {string} and password: {string}")
     public void iAsAUserLoginToTrelloWithCredentialsUsernameAndPassword(String userName, String passWord) {
-        trello = new Trello(driver);
+        trello = new Trello();
         trello.loginToPage(driver, userName, passWord);
     }
 

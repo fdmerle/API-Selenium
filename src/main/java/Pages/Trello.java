@@ -1,71 +1,59 @@
 package Pages;
 
+import wrappers.ControlType;
 import wrappers.Driver;
 import wrappers.WebObject;
+
 import java.util.HashMap;
 
 public class Trello extends MasterPage {
 
 
-    private enum objectName {
-        openLogin,
-        continueBtn,
-        login,
-        password,
-        submit,
-        boardLabel,
-        boardNameText,
-        editBoardNameText,
-        boardLink,
-        boardInList
+    private final HashMap<ControlType, WebObject> pageObjects = new HashMap<>();
+    private static final  String XPATH_TYPE = "xpath";
+    private static final  String ID_TYPE = "id";
+    public Trello() {
 
-    }
-    private final HashMap<objectName, WebObject> pageObjects;
-    public Trello(Driver driver) {
-        pageObjects = new HashMap<objectName, WebObject>() {
-            {
-                put(objectName.openLogin, new WebObject("xpath", ".//a[text()='Log in' and not(@tabindex)]"));
-                put(objectName.login, new WebObject("id", "user"));
-                put(objectName.continueBtn, new WebObject("id", "login"));
-                put(objectName.password, new WebObject("id", "password"));
-                put(objectName.submit, new WebObject("id", "login-submit"));
-                put(objectName.boardLabel, new WebObject("xpath", ".//div[@title='%s' and @class='board-tile-details-name']"));
-                put(objectName.boardNameText, new WebObject("xpath", ".//*[local-name()='h1' and text()='%s']"));
-                put(objectName.editBoardNameText, new WebObject("xpath", ".//input[@class='board-name-input js-board-name-input']"));
-                put(objectName.boardLink, new WebObject("xpath", ".//p[@class and text()='Boards']"));
-                put(objectName.boardInList, new WebObject("xpath", ".//div[contains(@style,'overflow') and text()='%s']"));
+        pageObjects.put(ControlType.OPEN_LOGIN, new WebObject(XPATH_TYPE, ".//a[text()='Log in' and not(@tabindex)]"));
+        pageObjects.put(ControlType.LOGIN, new WebObject(ID_TYPE, "user"));
+        pageObjects.put(ControlType.CONTINUE_BTN, new WebObject(ID_TYPE, "login"));
+        pageObjects.put(ControlType.PASSWORD, new WebObject(ID_TYPE, "password"));
+        pageObjects.put(ControlType.SUBMIT, new WebObject(ID_TYPE, "login-submit"));
+        pageObjects.put(ControlType.BOARD_LABEL, new WebObject(XPATH_TYPE, ".//div[@title='%s' and @class='board-tile-details-name']"));
+        pageObjects.put(ControlType.BOARD_NAME_TEXT, new WebObject(XPATH_TYPE, ".//*[local-name()='h1' and text()='%s']"));
+        pageObjects.put(ControlType.EDIT_BOARD_NAME_TEXT, new WebObject(XPATH_TYPE, ".//input[@class='board-name-input js-board-name-input']"));
+        pageObjects.put(ControlType.BOARD_LINK, new WebObject(XPATH_TYPE, ".//p[@class and text()='Boards']"));
+        pageObjects.put(ControlType.BOARD_IN_LIST, new WebObject(XPATH_TYPE, ".//div[contains(@style,'overflow') and text()='%s']"));
 
-            }
-        };
     }
     public void loginToPage(Driver driver, String login, String password) {
-        doClick(driver,pageObjects.get(objectName.openLogin));
-        enterText(driver, pageObjects.get(objectName.login), login);
-        doClick(driver,pageObjects.get(objectName.continueBtn));
-        enterText(driver, pageObjects.get(objectName.password), password);
-        doClick(driver,pageObjects.get(objectName.submit));
+        doClick(driver,pageObjects.get(ControlType.OPEN_LOGIN));
+        enterText(driver, pageObjects.get(ControlType.LOGIN), login);
+        doClick(driver,pageObjects.get(ControlType.CONTINUE_BTN));
+        enterText(driver, pageObjects.get(ControlType.PASSWORD), password);
+        doClick(driver,pageObjects.get(ControlType.SUBMIT));
     }
     public void openBoard(Driver driver, String boardName) {
         doClick(driver,pageObjects.
-                get(objectName.boardLabel).
+                get(ControlType.BOARD_LABEL).
                 addStringToXpath(boardName));
 
     }
     public void modifyBoardName(Driver driver, String oldName, String newName) {
         doClick(driver,
                 pageObjects.
-                        get(objectName.boardNameText).
+                        get(ControlType.BOARD_NAME_TEXT).
                         addStringToXpath(oldName));
-        enterText(driver,pageObjects.get(objectName.editBoardNameText),newName);
+        enterText(driver,pageObjects.get(ControlType.EDIT_BOARD_NAME_TEXT),newName);
 
     }
     public void clickOnBoardLink(Driver driver) {
-        doClick(driver,pageObjects.get(objectName.boardLink));
+        doClick(driver,pageObjects.get(ControlType.BOARD_LINK));
     }
 
     public boolean boardsIsExist(Driver driver, String boardName) {
         return pageObjects.
-                get(objectName.boardInList).
+                get(ControlType.BOARD_IN_LIST).
                 addStringToXpath(boardName).
                 objectExist(driver);
     }

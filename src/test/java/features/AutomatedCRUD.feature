@@ -17,7 +17,7 @@ Feature: Automated CRUD
 
 @UI
   Scenario: modify existing board API
-    Given I as a user open navigate to url "http://trello.com" using browser "Chrome"
+    Given I as a user open navigate to url "http://trello.com" using browser "CHROME"
     And I as a user login to trello with credentials username "mdmerle@gmail.com" and password: "p@ssworD"
     When I as a user create board with name "BoardName"
     And I as a user open the board with name "BoardName"

@@ -8,21 +8,24 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import settingsObj.DriverTypes;
 import java.time.Duration;
+import java.util.logging.Logger;
+
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 public class Driver {
     private WebDriver webDriver;
+    Logger logger = Logger.getLogger(Driver.class.getName());
 
     public void setWebDriver(String driverString) {
         switch (DriverTypes.valueOf(driverString)) {
-            case Chrome:
-                System.out.println("Chrome test starting ...");
+            case CHROME:
+                logger.info("Chrome test starting ...");
                 ChromeOptions optionsChrome = new ChromeOptions();
                 optionsChrome.addArguments("--remote-allow-origins=*");
                 System.setProperty("webdriver.chrome.driver", getChromeDriverPath());
                 webDriver = new ChromeDriver(optionsChrome);
                 break;
-            case FireFox:
+            case FIRE_FOX:
                 FirefoxOptions opt = new FirefoxOptions();
                 opt.setCapability("marionette", true);
                 webDriver = new FirefoxDriver(opt);
@@ -34,11 +37,11 @@ public class Driver {
     }
 
     public static String getChromeDriverPath() {
-        String OS = System.getProperty("os.name");
+        String propertyOS = System.getProperty("os.name");
 
-        if (OS.contains("Window")) {
+        if (propertyOS.contains("Window")) {
             return "libs/chromedriver_win.exe";
-        } else if (OS.contains("Mac")) {
+        } else if (propertyOS.contains("Mac")) {
             return "libs/chromedriver_mac";
         } else {
             return "libs/chromedriver_linux";
@@ -52,7 +55,7 @@ public class Driver {
             wait.until(ExpectedConditions.visibilityOf(getWebDriver().findElement(By.xpath(webElementXpath))));
             return true;
         } catch (Exception e) {
-            System.out.println("Not present: " + webElementXpath);
+            logger.info("Not present: " + webElementXpath);
             return false;
         }
     }

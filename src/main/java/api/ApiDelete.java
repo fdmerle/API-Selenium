@@ -3,11 +3,11 @@ package api;
 import io.restassured.response.Response;
 
 public class ApiDelete extends TrelloHelper {
-    private final String boardsApi = "/boards/";
     String allBoardsApi = "/members/me/boards";
 
     public boolean removeBoardWithId(String name) {
         ApiRead apiRead = new ApiRead();
+        String boardsApi = "/boards/";
         return statusIsCorrect(returnResponseDelete(boardsApi, apiRead.getBoardId(name)));
     }
 
@@ -18,10 +18,9 @@ public class ApiDelete extends TrelloHelper {
     }
    public void removeAllBoards(String itemName) {
         Response response = returnResponseGet(allBoardsApi);
-        ApiRead apiRead = new ApiRead();
         if(response.jsonPath().getString("name").contains(itemName)){
             int i = 0;
-            while (response.jsonPath().getString("name[" + String.valueOf(i) + "]").equals(itemName)) {
+            while (response.jsonPath().getString("name[" + i + "]").equals(itemName)) {
                 removeBoardWithId(itemName);
                 i++;
             }

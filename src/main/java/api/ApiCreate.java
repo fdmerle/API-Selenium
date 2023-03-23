@@ -10,9 +10,9 @@ public class ApiCreate extends TrelloHelper{
     public Response createBoardWithResponse(String boardName){
         String apiBoardCreate = "/boards/";
         String name = "name";
-        Map<String, String> paramMap = new HashMap<String, String>() {{
-            put(name,boardName);
-        }};
+        Map<String, String> paramMap = new HashMap<>();
+            paramMap.put(name,boardName);
+
         return returnResponsePost(apiBoardCreate,paramMap);
 
     }
@@ -25,10 +25,10 @@ public class ApiCreate extends TrelloHelper{
         String boardParam = "idBoard";
         String name = "name";
         ApiRead apiRead = new ApiRead();
-        Map<String, String> paramMap = new HashMap<String, String>() {{
-            put(name,nameList);
-            put(boardParam,apiRead.getBoardId(boardName));
-        }};
+        Map<String, String> paramMap = new HashMap<>();
+            paramMap.put(name,nameList);
+            paramMap.put(boardParam,apiRead.getBoardId(boardName));
+
         return statusIsCorrect(returnResponsePost(apiListCreate,paramMap));
     }
 
@@ -37,10 +37,10 @@ public class ApiCreate extends TrelloHelper{
         String listParam = "idList";
         String name = "name";
         ApiRead apiRead = new ApiRead();
-        Map<String, String> paramMap = new HashMap<String, String>() {{
-            put(name,nameCard);
-            put(listParam,apiRead.getListIdOnBoard(nameList,nameBoard));
-        }};
+        Map<String, String> paramMap = new HashMap<>();
+            paramMap.put(name,nameCard);
+            paramMap.put(listParam,apiRead.getListIdOnBoard(nameList,nameBoard));
+
         return statusIsCorrect(returnResponsePost(apiListCreate,paramMap));
 
     }

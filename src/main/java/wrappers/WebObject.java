@@ -3,10 +3,10 @@ package wrappers;
 import org.openqa.selenium.By;
 
 public class WebObject {
-    private String objectType;
+    private final String objectType;
     private String objectValue;
     private By byObject;
-    private String objectValueOrig;
+    private final String objectValueOrig;
 
     public WebObject(String objType, String objValue) {
         objectType = objType;
@@ -30,11 +30,7 @@ public class WebObject {
 
     }
 
-    public int returnObjectAmount(Driver driver) {
 
-        return driver.getWebDriver().findElements(byObject).size();
-
-    }
 
     public WebObject addStringToXpath(String value) {
         objectValue = objectValueOrig;
@@ -45,7 +41,7 @@ public class WebObject {
 
     public boolean objectExist(Driver driver) {
         driver.waitToBeClickable(byObject,5);
-        return driver.getWebDriver().findElements(byObject).size() > 0;
+        return !driver.getWebDriver().findElements(byObject).isEmpty();
     }
 
     public By getBy() {

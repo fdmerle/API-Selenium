@@ -1,5 +1,5 @@
 package settingsObj;
 public enum DriverTypes {
 
-FireFox, Chrome
+    FIRE_FOX, CHROME
 }

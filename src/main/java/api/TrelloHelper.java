@@ -16,7 +16,7 @@ public class TrelloHelper {
     int expectedStatus = 200;
 
 
-    private RequestSpecification requestSpecification;
+    private final RequestSpecification requestSpecification;
 
     public TrelloHelper() {
         requestSpecification= requestSpecificationGet();
@@ -36,10 +36,10 @@ public class TrelloHelper {
     String getItemByName(Response response, String itemName) {
         if (response.jsonPath().getString("name").contains(itemName)) {
             int i = 0;
-            while (!response.jsonPath().getString("name[" + String.valueOf(i) + "]").equals(itemName)) {
+            while (!response.jsonPath().getString("name[" + i + "]").equals(itemName)) {
                 i++;
             }
-            return response.jsonPath().getString("id[" + String.valueOf(i) + "]");
+            return response.jsonPath().getString("id[" + i + "]");
         }
         return null;
     }
@@ -50,7 +50,7 @@ public class TrelloHelper {
 
     Response returnResponsePost(String call, Map<String, String> params) {
         RequestSpecification reqApi = given().spec(requestSpecification).contentType("application/json");
-        params.forEach((key,value)->reqApi.queryParam(key,value));
+        params.forEach(reqApi::queryParam);
         return reqApi.when().post(call);
     }
 
