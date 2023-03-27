@@ -1,4 +1,4 @@
-package wrappers;
+package settingsObj;
 
 public enum ControlType {
     OPEN_LOGIN,

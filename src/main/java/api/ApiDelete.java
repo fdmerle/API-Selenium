@@ -2,7 +2,7 @@ package api;
 
 import io.restassured.response.Response;
 
-public class ApiDelete extends TrelloHelper {
+public class ApiDelete extends TrelloParent {
     String allBoardsApi = "/members/me/boards";
 
     public boolean removeBoardWithId(String name) {

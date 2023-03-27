@@ -1,13 +1,14 @@
 package api;
 
+
+
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class TrelloHelper {
+public class TrelloParent {
 
     String basedUrl = "https://api.trello.com/1";
     String key = "5055ed8ee14c50d97b804730cf275f60";
@@ -18,7 +19,7 @@ public class TrelloHelper {
 
     private final RequestSpecification requestSpecification;
 
-    public TrelloHelper() {
+    public TrelloParent() {
         requestSpecification= requestSpecificationGet();
     }
 
@@ -57,6 +58,8 @@ public class TrelloHelper {
     Response returnResponseDelete(String call, String iD){
         return given().spec(requestSpecification).when().delete(call+iD);
     }
+
+
 
     boolean statusIsCorrect(Response response){
         return response.getStatusCode()==expectedStatus;

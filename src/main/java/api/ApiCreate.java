@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ApiCreate extends TrelloHelper{
+public class ApiCreate extends TrelloParent {
 
     public Response createBoardWithResponse(String boardName){
         String apiBoardCreate = "/boards/";

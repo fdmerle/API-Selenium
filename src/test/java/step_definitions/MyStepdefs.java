@@ -12,9 +12,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import jsonObj.GetCredentials;
 import org.junit.Assert;
 import wrappers.Driver;
-import wrappers.ObjectType;
+import settingsObj.ObjectType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -86,12 +87,14 @@ public class MyStepdefs {
 
     @After
     public void cleanUp() {
-        if (history.containsKey(ObjectType.BOARD)) {
-            apiDelete.removeAllBoards(history.get(ObjectType.BOARD));
-        }
-        if (trello != null) {
-            trello.cleanDriver(driver);
+        if (!history.isEmpty()) {
+            if (history.containsKey(ObjectType.BOARD)) {
+                apiDelete.removeAllBoards(history.get(ObjectType.BOARD));
+            }
+            if (trello != null) {
+                trello.cleanDriver(driver);
 
+            }
         }
     }
 
@@ -101,18 +104,16 @@ public class MyStepdefs {
         driver.getWebDriver().get(url);
     }
 
-    @Given("I as a user login to trello with credentials username {string} and password: {string}")
-    public void iAsAUserLoginToTrelloWithCredentialsUsernameAndPassword(String userName, String passWord) {
+    @And("I as a user login to trello with {string} credentials")
+    public void iAsAUserLoginToTrelloWithCredentials(String credType) {
+        GetCredentials getCredentials = new GetCredentials();
         trello = new Trello();
-        trello.loginToPage(driver, userName, passWord);
+        trello.loginToPage(driver, getCredentials.getName(credType), getCredentials.getPass(credType));
     }
-
     @And("I as a user open the board with name {string}")
     public void iAsAUserOpenTheBoardWithName(String boardName) {
         trello.openBoard(driver, boardName);
         history.put(ObjectType.BOARD, boardName);
-
-
     }
 
     @And("I as a user modify the board name from {string} to {string}")
@@ -207,5 +208,7 @@ public class MyStepdefs {
     @And("I am have rights to add comments: {string}")
     public void iAmHaveRightsToAddComments(String arg0) {
     }
+
+
 }
 

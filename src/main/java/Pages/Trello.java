@@ -1,6 +1,6 @@
 package Pages;
 
-import wrappers.ControlType;
+import settingsObj.ControlType;
 import wrappers.Driver;
 import wrappers.WebObject;
 
