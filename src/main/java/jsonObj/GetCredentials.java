@@ -30,7 +30,7 @@ public class GetCredentials {
     }
 
     public String getName(String group){
-        String name = "name";
+        String name = "user";
         return getCredentials(group).get(name);
     }
 
