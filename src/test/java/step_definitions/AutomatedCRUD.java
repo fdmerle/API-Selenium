@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class MyStepdefs {
+public class AutomatedCRUD {
 
     ApiRead apiRead;
     ApiCreate apiCreate;
