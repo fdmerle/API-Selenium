@@ -28,19 +28,24 @@ public class TrelloParent {
     }
 
     RequestSpecification requestSpecificationGet() {
+        String tknLbl = "token";
+        String keyLbl = "key";
         return given()
                 .baseUri(basedUrl)
-                .queryParam("token", token)
-                .queryParam("key", key);
+                .queryParam(tknLbl, token)
+                .queryParam(keyLbl, key);
     }
 
     String getItemByName(Response response, String itemName) {
-        if (response.jsonPath().getString("name").contains(itemName)) {
+        String strToGet = "name";
+        String nameInc = "name[%s]";
+        String idInc =  "id[%s]";
+        if (response.jsonPath().getString(strToGet).contains(itemName)) {
             int i = 0;
-            while (!response.jsonPath().getString("name[" + i + "]").equals(itemName)) {
+            while (!response.jsonPath().getString(String.format(nameInc,i)).equals(itemName)) {
                 i++;
             }
-            return response.jsonPath().getString("id[" + i + "]");
+            return response.jsonPath().getString(String.format(idInc,i));
         }
         return null;
     }
@@ -50,7 +55,8 @@ public class TrelloParent {
     }
 
     Response returnResponsePost(String call, Map<String, String> params) {
-        RequestSpecification reqApi = given().spec(requestSpecification).contentType("application/json");
+        String contentType = "application/json";
+        RequestSpecification reqApi = given().spec(requestSpecification).contentType(contentType);
         params.forEach(reqApi::queryParam);
         return reqApi.when().post(call);
     }

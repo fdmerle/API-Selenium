@@ -8,6 +8,7 @@ Feature: Automated CRUD
     And I as a user create card with name "<CardName>" in list with name "<ListName>" from the board "<BoardName>"
     And I remove the card with name "<CardName>" from the list "<ListName>" of board "<BoardName>"
     When I remove the board with name "<BoardName>"
+    Then The board with name "<BoardName>" should be removed
     Examples:
       | BoardName | ListName | CardName |
       | MyBoard   | MyList   | MyCard   |

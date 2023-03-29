@@ -16,20 +16,11 @@ public class WebObject {
     }
 
     private void byGenerate(String value, String type) {
-
         switch (type) {
-            case "xpath":
-                byObject = By.xpath(value);
-                break;
-            case "id":
-                byObject = By.id(value);
-                break;
-            default:
-                break;
+            case "xpath" -> byObject = By.xpath(value);
+            case "id" -> byObject = By.id(value);
         }
-
     }
-
 
 
     public WebObject addStringToXpath(String value) {
@@ -40,7 +31,8 @@ public class WebObject {
     }
 
     public boolean objectExist(Driver driver) {
-        driver.waitToBeClickable(byObject,5);
+        int timeout = 5;
+        driver.waitToBeClickable(byObject, timeout);
         return !driver.getWebDriver().findElements(byObject).isEmpty();
     }
 

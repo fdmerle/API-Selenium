@@ -17,45 +17,54 @@ public class Driver {
     Logger logger = Logger.getLogger(Driver.class.getName());
 
     public void setWebDriver(String driverString) {
+        String chromeOpt = "--remote-allow-origins=*";
+        String propName = "webdriver.chrome.driver";
+        String capabName = "marionette";
         switch (DriverTypes.valueOf(driverString)) {
-            case CHROME:
+            case CHROME -> {
                 logger.info("Chrome test starting ...");
                 ChromeOptions optionsChrome = new ChromeOptions();
-                optionsChrome.addArguments("--remote-allow-origins=*");
-                System.setProperty("webdriver.chrome.driver", getChromeDriverPath());
+                optionsChrome.addArguments(chromeOpt);
+                System.setProperty(propName, getChromeDriverPath());
                 webDriver = new ChromeDriver(optionsChrome);
-                break;
-            case FIRE_FOX:
+            }
+            case FIRE_FOX -> {
                 FirefoxOptions opt = new FirefoxOptions();
-                opt.setCapability("marionette", true);
+                opt.setCapability(capabName, true);
                 webDriver = new FirefoxDriver(opt);
-                break;
-            default:
-                webDriver = null;
+            }
+            default -> webDriver = null;
         }
 
     }
 
     public static String getChromeDriverPath() {
-        String propertyOS = System.getProperty("os.name");
+        String strProp = "os.name";
+        String strWindowType="Windows";
+        String strMacType= "Mac";
+        String pathToChromeWin = "libs/chromedriver_win.exe";
+        String pathToChromeMac = "libs/chromedriver_mac";
+        String pathToChromeLin = "libs/chromedriver_linux";
+        String propertyOS = System.getProperty(strProp);
 
-        if (propertyOS.contains("Window")) {
-            return "libs/chromedriver_win.exe";
-        } else if (propertyOS.contains("Mac")) {
-            return "libs/chromedriver_mac";
+        if (propertyOS.contains(strWindowType)) {
+            return pathToChromeWin;
+        } else if (propertyOS.contains(strMacType)) {
+            return pathToChromeMac;
         } else {
-            return "libs/chromedriver_linux";
+            return pathToChromeLin;
         }
     }
 
 
     public boolean waitElementToBeVisible(String webElementXpath, int timeOut) {
         WebDriverWait wait = new WebDriverWait(getWebDriver(), Duration.ofSeconds(timeOut));
+        String errorMsg = "Not present: %";
         try {
             wait.until(ExpectedConditions.visibilityOf(getWebDriver().findElement(By.xpath(webElementXpath))));
             return true;
         } catch (Exception e) {
-            logger.info("Not present: " + webElementXpath);
+            logger.info(String.format(errorMsg, webElementXpath));
             return false;
         }
     }

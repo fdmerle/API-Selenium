@@ -128,6 +128,11 @@ public class AutomatedCRUD {
 
     }
 
+    @Then("The board with name {string} should be removed")
+    public void theBoardWithNameShouldBeRemoved(String boardName) {
+        Assert.assertFalse(trello.boardsIsExist(driver, boardName));
+    }
+
     @And("I as a user click on Board link")
     public void iAsAUserClickOnBoardLink() {
         trello.clickOnBoardLink(driver);
@@ -208,6 +213,7 @@ public class AutomatedCRUD {
     @And("I am have rights to add comments: {string}")
     public void iAmHaveRightsToAddComments(String arg0) {
     }
+
 
 
 }

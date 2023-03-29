@@ -17,10 +17,12 @@ public class ApiDelete extends TrelloParent {
         return statusIsCorrect(returnResponseDelete(cardApi, apiRead.getCardIdInListFromBoard(cardName, listName, boardName)));
     }
    public void removeAllBoards(String itemName) {
+        String getStringVal = "name";
+        String jsnStr = "name[%s]";
         Response response = returnResponseGet(allBoardsApi);
-        if(response.jsonPath().getString("name").contains(itemName)){
+        if(response.jsonPath().getString(getStringVal).contains(itemName)){
             int i = 0;
-            while (response.jsonPath().getString("name[" + i + "]").equals(itemName)) {
+            while (response.jsonPath().getString(String.format(jsnStr,i)).equals(itemName)) {
                 removeBoardWithId(itemName);
                 i++;
             }
