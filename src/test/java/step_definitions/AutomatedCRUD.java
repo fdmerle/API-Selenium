@@ -1,6 +1,8 @@
 package step_definitions;
 
-import Pages.Trello;
+import pages.BoardPage;
+import pages.LoginPage;
+import pages.MainPage;
 import api.ApiCreate;
 import api.ApiDelete;
 import api.ApiRead;
@@ -30,7 +32,8 @@ public class AutomatedCRUD {
     Map<ObjectType, String> history;
 
     private final Driver driver = new Driver();
-    private Trello trello;
+    private MainPage mainPage;
+    private BoardPage boardPage;
     Response responseBoard;
 
     @Before
@@ -91,8 +94,8 @@ public class AutomatedCRUD {
             if (history.containsKey(ObjectType.BOARD)) {
                 apiDelete.removeAllBoards(history.get(ObjectType.BOARD));
             }
-            if (trello != null) {
-                trello.cleanDriver(driver);
+            if (mainPage != null) {
+                mainPage.cleanDriver(driver);
 
             }
         }
@@ -106,36 +109,37 @@ public class AutomatedCRUD {
 
     @And("I as a user login to trello with {string} credentials")
     public void iAsAUserLoginToTrelloWithCredentials(String credType) {
+
         GetCredentials getCredentials = new GetCredentials();
-        trello = new Trello();
-        trello.loginToPage(driver, getCredentials.getName(credType), getCredentials.getPass(credType));
+        LoginPage loginToPage = new LoginPage();
+        mainPage = loginToPage.loginToPage(driver, getCredentials.getName(credType), getCredentials.getPass(credType));
     }
     @And("I as a user open the board with name {string}")
     public void iAsAUserOpenTheBoardWithName(String boardName) {
-        trello.openBoard(driver, boardName);
+        boardPage = new BoardPage();
+        boardPage = mainPage.openBoard(driver, boardName);
         history.put(ObjectType.BOARD, boardName);
     }
 
     @And("I as a user modify the board name from {string} to {string}")
     public void iAsAUserModifyTheBoardNameFromTo(String oldName, String newName) {
-        trello.modifyBoardName(driver, oldName, newName);
+        boardPage.modifyBoardName(driver, oldName, newName);
     }
 
     @Then("board name should be {string}")
     public void boardNameShouldBe(String boardName) {
-        Assert.assertTrue(trello.boardsIsExist(driver, boardName));
+        Assert.assertTrue(boardPage.boardsIsExist(driver, boardName));
         history.put(ObjectType.BOARD, boardName);
 
     }
 
     @Then("The board with name {string} should be removed")
     public void theBoardWithNameShouldBeRemoved(String boardName) {
-        Assert.assertFalse(trello.boardsIsExist(driver, boardName));
-    }
+        Assert.assertNull(apiRead.getBoardId( boardName));    }
 
     @And("I as a user click on Board link")
     public void iAsAUserClickOnBoardLink() {
-        trello.clickOnBoardLink(driver);
+        boardPage.clickOnBoardLink(driver);
     }
 
     @And("Create new board")
